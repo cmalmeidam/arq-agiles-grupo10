@@ -1,4 +1,4 @@
-from sc03 import create_app
+from sc04 import create_app
 from flask_restful import Api
 from .vistas import *
 
@@ -8,5 +8,3 @@ app_context.push()
 
 api = Api(app)
 api.add_resource(VistaRespuesta, '/respuesta')
-
-
