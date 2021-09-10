@@ -12,5 +12,5 @@ class VistaRespuesta(Resource):
             time.sleep(1)
             t -= 1
 
-        logging.info("El microservicio SC03 respondio de forma correcta en " + timeResponse +" segundos")
+        logging.info("El microservicio SC03 respondio: Respuesta correcta, "+ str(200)+ " en " + timeResponse +" s")
         return "Respuesta correcta", 200

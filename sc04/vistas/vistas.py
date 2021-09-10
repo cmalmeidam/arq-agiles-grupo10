@@ -21,5 +21,5 @@ class VistaRespuesta(Resource):
         elif option == 4:
             respuesta = "Error interno en el servidor"
             cod = 500
-        logging.info("El microservicio SC04 respondio: " + respuesta +", "+ str(cod))
+        logging.info("El microservicio SC04 respondio: " + respuesta +", "+ str(cod)+ " en " + str(1) +" s")
         return respuesta, cod
