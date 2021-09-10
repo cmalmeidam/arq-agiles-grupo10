@@ -1,10 +1,10 @@
 from flask_restful import Resource
-import time
+import time, random
 
 class VistaRespuesta(Resource):
 
     def get(self):
-        t=10
+        t=random.randint(0, 300)
         while t:
             time.sleep(1)
             t -= 1
