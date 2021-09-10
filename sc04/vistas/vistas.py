@@ -4,7 +4,7 @@ import random, logging
 class VistaRespuesta(Resource):
 
     def get(self):
-        logging.basicConfig(filename='./log/sc04.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+        logging.basicConfig(filename='./log/sc04.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', encoding = "UTF-8")
         option=random.randint(0, 4)
         if option == 0:
             respuesta = "Repuesta correcta"
