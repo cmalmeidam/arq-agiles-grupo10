@@ -1,9 +1,10 @@
 from flask_restful import Resource
-import random
+import random, logging
 
 class VistaRespuesta(Resource):
 
     def get(self):
+        logging.basicConfig(filename='./log/sc04.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
         option=random.randint(0, 4)
         if option == 0:
             respuesta = "Repuesta correcta"
@@ -20,5 +21,5 @@ class VistaRespuesta(Resource):
         elif option == 4:
             respuesta = "Error interno en el servidor"
             cod = 500
-
+        logging.info("El microservicio SC04 respondio: " + respuesta +", "+ str(cod))
         return respuesta, cod
