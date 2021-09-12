@@ -1,9 +1,11 @@
 import boto3
-import logger
 import os
 import time
+import logging
 
 try:
+    logging.basicConfig(filename='trazabilidad.log', level=logging.INFO, format='%(asctime)s %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p', encoding="UTF-8")
     sqs_client = boto3.client(
             'sqs',
             region_name=os.environ['AWS_REGION'],
@@ -13,12 +15,12 @@ try:
             aws_access_key_id=os.environ['ACCESS_KEY'],
             aws_secret_access_key=os.environ['SECRET_KEY'])
 except Exception as e:
-    logger.logger.error(e)
+    logging.error(e)
 
 queue_url = sqs_client.get_queue_url(QueueName=os.environ['SQS_QUEUE_NAME'])['QueueUrl']
 #logger.logger.info(queue_url)
 while True:
-    logger.logger.info('******Incia ciclo')
+    logging.info('******Incia ciclo')
     try:
         # Receive message from SQS queue
         response = sqs_client.receive_message(
@@ -37,7 +39,8 @@ while True:
         message = response['Messages'][0]
         receipt_handle = message['ReceiptHandle']
 
-        logger.logger.info('Received message: %s' % message)
+        logging.info('Received message: %s' % message)
+        logging.info(message)
 
         # Delete received message from queue
         sqs_client.delete_message(
@@ -45,8 +48,8 @@ while True:
               ReceiptHandle=receipt_handle
             )
 
-        logger.logger.info('Delete')
+        logging.info('Delete')
 
     except Exception as e:
-        logger.logger.error(e)
+        logging.error(e)
     time.sleep(5)
