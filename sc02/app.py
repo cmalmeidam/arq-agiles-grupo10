@@ -7,9 +7,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def respuesta():
-    if request.method == 'POST':
-        request_data = 'Error en los datos'
-        logging.info(request_data)
+        logging.info('405')
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=5000)
