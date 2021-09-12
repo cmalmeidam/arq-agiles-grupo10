@@ -73,9 +73,9 @@ def get_data():
                 promise.result().content
                 ''' Revisar logica de criterio para rechazar request HTTP '''
                 #Esta podría ser una opción para simular un error de Conección generando una variable aleatoria o recibiendo alguna instrucción del servicio en el body o el status code
-                if(promise.requesDetails["service"]["nombre"] == "SC01"):
-                    t = random.randint(0, 10)
-                    if(t > 7):
+                if(promise.requesDetails["service"]["nombre"] == "SC02"):
+                    #Condición para triggerear simulación de caída
+                    if(promise.result().status_code == 201):
                         raise ConnectionError
                 if(promise.result().status_code != 200):
                     raise HTTPError()
