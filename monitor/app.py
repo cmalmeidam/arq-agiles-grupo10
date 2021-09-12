@@ -1,3 +1,4 @@
+import time, random
 from monitor import create_app
 from concurrent.futures import as_completed, ThreadPoolExecutor
 from requests_futures.sessions import FuturesSession
@@ -9,6 +10,10 @@ import requests
 app = create_app('default')
 app_context = app.app_context()
 app_context.push()
+
+# add urls of services to be monitored, states are not considered yet in the logic
+currentServices = ['http://localhost:5001','http://localhost:5002','http://localhost:5003']
+currentServicesLength = len(currentServices)
 
 def response_hook(resp, *args, **kwargs):
     print(resp)
@@ -32,18 +37,26 @@ def get_data():
         promises = []
         for i in range(150):
             """logic to assing randomly a service and attach info to the request to process event in case of error"""
-            currentSession = session.get('http://example.com',timeout=0.1)
-            currentSession.requestType = i
+            t = random.randint(0, currentServicesLength) - 1
+            currentSession = session.get(currentServices[t], timeout=0.1)
+            currentSession.requestDetails = {
+                "serviceUrl": currentServices[t],
+            }
             promises.append(currentSession)
         print(promises)
         for promise in as_completed(promises):
             try:
+                time.sleep(1)
+                print(promise.requestDetails)
                 return promise.result().content
             except ConnectTimeout as e:
                 '''Add logic for log in case theres a timeout'''
-                print(promise.requestType)
+                print(promise.requestDetails)
                 print(format_prepped_request(e.request))
             except HTTPError as e:
+                print(promise.requestDetails)
                 '''Add logic for log in case theres an HTTP error response'''
+                print(e)
+            except requests.exceptions.ConnectionError as e:
                 print(e)
     return 'Test'
