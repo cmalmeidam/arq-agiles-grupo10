@@ -20,7 +20,7 @@ except Exception as e:
 queue_url = sqs_client.get_queue_url(QueueName=os.environ['SQS_QUEUE_NAME'])['QueueUrl']
 #logger.logger.info(queue_url)
 while True:
-    logging.info('******Incia ciclo')
+    #logging.info('******Incia ciclo')
     try:
         # Receive message from SQS queue
         response = sqs_client.receive_message(
@@ -40,7 +40,7 @@ while True:
         receipt_handle = message['ReceiptHandle']
 
         logging.info('Received message: %s' % message)
-        logging.info(message)
+        logging.info(message['Body'])
 
         # Delete received message from queue
         sqs_client.delete_message(
@@ -48,8 +48,8 @@ while True:
               ReceiptHandle=receipt_handle
             )
 
-        logging.info('Delete')
+        #logging.info('Delete')
 
     except Exception as e:
         logging.error(e)
-    time.sleep(5)
+    time.sleep(1)

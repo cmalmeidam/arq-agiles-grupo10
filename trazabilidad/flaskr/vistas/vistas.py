@@ -5,6 +5,7 @@ from flask import request, jsonify
 import logger
 from random import randrange
 import os
+import logging
 
 def json_status(status_code, message):
     res = jsonify({
@@ -22,6 +23,20 @@ class PublicarMsj(Resource):
         r = requests.get('https://sqs.us-east-2.amazonaws.com/867579940304/alertas-monitor.fifo?Action=SendMessage', params=parametros)
         logger.logger.info(r)
         return json_status(200, 'Message sent')
+
+class Respuesta(Resource):
+    logging.basicConfig(filename='SC00.log', level=logging.INFO, format='%(asctime)s %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p', encoding="UTF-8")
+    def get (self):
+        dec = randrange(99999)
+        cod = ''
+        if dec % 2 == 0:
+            cod = 200
+        else:
+            cod = 201
+
+        logging.info("El microservicio SC04 respondio: " + "respuesta" +", "+ str(cod)+ " en " + str(1) +" s")
+        return 'Servicio SC02', cod
 
 class PublicarMsj2(Resource):
     def post (self):
