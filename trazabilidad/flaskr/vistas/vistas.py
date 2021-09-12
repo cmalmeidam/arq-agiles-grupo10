@@ -25,7 +25,7 @@ class PublicarMsj(Resource):
         return json_status(200, 'Message sent')
 
 class Respuesta(Resource):
-    logging.basicConfig(filename='trazabilidad.log', level=logging.INFO, format='%(asctime)s %(message)s',
+    logging.basicConfig(filename='SC00.log', level=logging.INFO, format='%(asctime)s %(message)s',
                         datefmt='%m/%d/%Y %I:%M:%S %p', encoding="UTF-8")
     def get (self):
         dec = randrange(99999)
