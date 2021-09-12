@@ -14,7 +14,7 @@ app_context = app.app_context()
 app_context.push()
 
 # add urls of services to be monitored, states are not considered yet in the logic
-currentServices = [{"url": 'http://localhost:5000/respuesta', "nombre": "SCO3"},{"url": 'http://localhost:5001/respuesta', "nombre": "SCO4"}]
+currentServices = [{"url": 'http://localhost:5000/respuesta', "nombre": "SCO3"},{"url": 'http://localhost:5001/respuesta', "nombre": "SCO4"},{"url": 'http://localhost:5002/respuesta', "nombre": "SCO1"}]
 currentServicesLength = len(currentServices)
 
 
@@ -58,7 +58,7 @@ def format_prepped_request(prepped, encoding=None):
 def get_data():
     with FuturesSession(executor=ThreadPoolExecutor(max_workers=10)) as session:
         promises = []
-        for i in range(150):
+        for i in range(10):
             """logic to assing randomly a service and attach info to the request to process event in case of error"""
             t = random.randint(0, currentServicesLength) - 1
             currentSession = session.get(currentServices[t]["url"], timeout=2)
@@ -71,9 +71,18 @@ def get_data():
             try:
                 time.sleep(1)
                 promise.result().content
+                ''' Revisar logica de criterio para rechazar request HTTP '''
+                #Esta podría ser una opción para simular un error de Conección generando una variable aleatoria o recibiendo alguna instrucción del servicio en el body o el status code
+                if(promise.requesDetails["service"]["nombre"] == "SC01"):
+                    t = random.randint(0, 10)
+                    if(t > 7):
+                        raise ConnectionError
+                if(promise.result().status_code != 200):
+                    raise HTTPError()
                 print("RespuestaCorrecta")
                 print(promise.requestDetails)
-                msg = "El microservicio" + promise.requestDetails["service"]["nombre"] + "presenta" + "RespuestaCorrecta"
+                print(promise.result().status_code)
+                msg = "El microservicio " + promise.requestDetails["service"]["nombre"] + " presenta " + "RespuestaCorrecta"
                 post({'MessageBody': msg,
                       'MessageDeduplicationId': uuid.uuid4(), 'MessageGroupId': uuid.uuid4()})
             except ConnectTimeout as e:
@@ -81,26 +90,26 @@ def get_data():
                 print("ConnectTimeout")
                 print(promise.requestDetails)
                 print(format_prepped_request(e.request))
-                msg = "El microservicio" + promise.requestDetails["service"]["nombre"] + "tiene falla:" + "ConnectTimeout"
+                msg = "El microservicio " + promise.requestDetails["service"]["nombre"] + " tiene falla: " + "ConnectTimeout"
                 post({'MessageBody': msg,
                       'MessageDeduplicationId': uuid.uuid4(), 'MessageGroupId': uuid.uuid4()})
             except HTTPError as e:
                 '''Add logic for log in case theres an HTTP error response'''
                 print("HTTPError")
                 print(promise.requestDetails)
-                msg = "El microservicio" + promise.requestDetails["service"]["nombre"] + "tiene falla:" + "HTTPError"
+                msg = "El microservicio " + promise.requestDetails["service"]["nombre"] + " tiene falla: " + "HTTPError"
                 post({'MessageBody': msg,
                       'MessageDeduplicationId': uuid.uuid4(), 'MessageGroupId': uuid.uuid4()})
             except requests.exceptions.ConnectionError as e:
                 print("ConnectionError")
                 print(promise.requestDetails)
-                msg = "El microservicio" + promise.requestDetails["service"]["nombre"] + "tiene falla:" + "ConnectionError"
+                msg = "El microservicio " + promise.requestDetails["service"]["nombre"] + " tiene falla: " + "ConnectionError"
                 post({'MessageBody': msg,
                       'MessageDeduplicationId': uuid.uuid4(), 'MessageGroupId': uuid.uuid4()})
             except requests.exceptions.ReadTimeout as e:
                 print("ReadTimeoutError")
                 print(promise.requestDetails)
-                msg = "El microservicio" + promise.requestDetails["service"]["nombre"] + "tiene falla:" + "ReadTimeoutError"
+                msg = "El microservicio " + promise.requestDetails["service"]["nombre"] + " tiene falla: " + "ReadTimeoutError"
                 post({'MessageBody': msg,
                       'MessageDeduplicationId': uuid.uuid4(), 'MessageGroupId': uuid.uuid4()})
     return 'Test'
