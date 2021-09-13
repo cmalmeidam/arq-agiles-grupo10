@@ -14,7 +14,7 @@ app_context = app.app_context()
 app_context.push()
 
 # add urls of services to be monitored, states are not considered yet in the logic
-currentServices = [{"url": 'http://localhost:5000/respuesta', "nombre": "SCO3"},{"url": 'http://localhost:5001/respuesta', "nombre": "SCO4"},{"url": 'http://localhost:5002/respuesta', "nombre": "SCO1"}]
+currentServices = [{"url": 'http://localhost:5000/respuesta', "nombre": "SCO3"},{"url": 'http://localhost:5001/respuesta', "nombre": "SCO4"},{"url": 'http://localhost:5002/respuesta', "nombre": "SCO1"}, {"url": 'http://localhost:5003/respuesta', "nombre": "SCO2"}]
 currentServicesLength = len(currentServices)
 
 
@@ -56,9 +56,10 @@ def format_prepped_request(prepped, encoding=None):
 
 @app.route('/')
 def get_data():
+    countErrOmision = 0
     with FuturesSession(executor=ThreadPoolExecutor(max_workers=10)) as session:
         promises = []
-        for i in range(10):
+        for i in range(150):
             """logic to assing randomly a service and attach info to the request to process event in case of error"""
             t = random.randint(0, currentServicesLength) - 1
             currentSession = session.get(currentServices[t]["url"], timeout=2)
@@ -73,10 +74,18 @@ def get_data():
                 promise.result().content
                 ''' Revisar logica de criterio para rechazar request HTTP '''
                 #Esta podría ser una opción para simular un error de Conección generando una variable aleatoria o recibiendo alguna instrucción del servicio en el body o el status code
-                if(promise.requesDetails["service"]["nombre"] == "SC02"):
+                nombreService = str(promise.requestDetails["service"]["nombre"])
+                if nombreService == "SC02":
                     #Condición para triggerear simulación de caída
-                    if(promise.result().status_code == 201):
-                        raise ConnectionError
+                    if(promise.result().status_code == 500):
+                        countErrOmision=countErrOmision+1
+                        if(countErrOmision>5):
+                            raise ConnectionError
+                        else:
+                            raise HTTPError
+                else:
+                    countErrOmision=0
+
                 if(promise.result().status_code != 200):
                     raise HTTPError()
                 print("RespuestaCorrecta")

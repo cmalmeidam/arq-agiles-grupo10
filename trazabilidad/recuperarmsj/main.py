@@ -33,7 +33,7 @@ while True:
                 'All'
             ],
             VisibilityTimeout=20,
-            WaitTimeSeconds=2
+            WaitTimeSeconds=1
         )
 
         message = response['Messages'][0]
@@ -52,4 +52,4 @@ while True:
 
     except Exception as e:
         logging.error(e)
-    time.sleep(1)
+    time.sleep(0)
