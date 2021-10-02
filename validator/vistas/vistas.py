@@ -2,11 +2,12 @@ import json
 from flask_restful import Resource
 from flask import request
 import jwt
-import datetime
+import logging
 
 class VistaValidacion(Resource):
 
     def post(self):
+        logging.basicConfig(filename='./log/validator.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
         key = "secret"
         user = request.json["user"]
         token = request.json["token"]
@@ -51,5 +52,7 @@ class VistaValidacion(Resource):
         else:
             msg = "Posible suplantación de usuario"
             code = 429
+
+        logging.info("El microservicio Validator respondio: " + msg)
             
         return msg, code
