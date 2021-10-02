@@ -35,11 +35,11 @@ class Autenticar(Resource):
         else:
             token_de_acceso = jwt.encode(
                 {"exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=10), "usuario": request.json["usuario"],
-                 "ip": request.json["ip"]}, key, algorithm="HS256");
+                 "ip": request.json["ip"], "rol": usuario.rol}, key, algorithm="HS256");
             decode = jwt.decode(token_de_acceso, key, algorithms="HS256")
             logger.logger.info('decode = ' + str(decode))
             requests.get('https://sqs.us-east-2.amazonaws.com/867579940304/alertas-monitor.fifo?Action=SendMessage',
-                         params={'MessageBody': 'Autenticar ;' + 'UsuariocredencialesValidas ; ' + request.json["usuario"] + ' ; ' + request.json["ip"],
+                         params={'MessageBody': 'Autenticar ;' + 'UsuariocredencialesValidas ; ' + request.json["usuario"] + ' ; ' + request.json["ip"] + ' ; ' + usuario.rol,
                                  'MessageDeduplicationId': id1, 'MessageGroupId': id2})
             return {"mensaje": "Inicio de sesión exitoso", "token": token_de_acceso}
 
