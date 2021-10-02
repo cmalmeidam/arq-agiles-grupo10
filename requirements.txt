@@ -1,5 +1,0 @@
-Flask
-flask-marshmallow
-Flask-RESTful
-redis
-rq
