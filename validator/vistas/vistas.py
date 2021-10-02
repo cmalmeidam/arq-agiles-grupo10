@@ -1,6 +1,10 @@
 from flask_restful import Resource
+from flask import request
 
 class VistaValidacion(Resource):
 
-    def get(self):
-        return 'Respuesta correcta', 200
+    def post(self):
+        user = request.json["user"]
+        token = request.json["token"]
+        microservice = request.json["microservice"]
+        return 'Respuesta correcta es: ' + user, 200
