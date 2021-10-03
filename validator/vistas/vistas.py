@@ -11,7 +11,7 @@ class VistaValidacion(Resource):
     def post(self):
         id1 = randrange(99999)
         id2 = randrange(99999)
-        logging.basicConfig(filename='./log/validator.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+        logging.basicConfig(filename='./log/validator.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', encoding = "UTF-8")
         key = "secret"
         user = request.json["user"]
         token = request.json["token"]
