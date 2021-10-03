@@ -5,7 +5,6 @@ from requests_futures.sessions import FuturesSession
 from requests.exceptions import ConnectTimeout, HTTPError, ReadTimeout
 from pprint import pprint
 import requests
-import logger
 from flask import jsonify
 import uuid
 import logging
@@ -13,7 +12,7 @@ import logging
 app = create_app('default')
 app_context = app.app_context()
 app_context.push()
-logging.basicConfig(filename='/log/escenarios.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', encoding = "UTF-8")
+logging.basicConfig(filename='escenarios.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', encoding = "UTF-8")
 
 # validUsers in db or service
 users = [{ "email": "chalmeida", "password": "chalmeida"},{ "email": "user1", "password": "user1"}]
@@ -45,7 +44,6 @@ def json_status(status_code, message):
 def post(parameters):
     r = requests.get('https://sqs.us-east-2.amazonaws.com/867579940304/alertas-monitor.fifo?Action=SendMessage',
                      params=parameters)
-    logger.logger.info(r)
     return json_status(200, 'Message sent')
 
 
