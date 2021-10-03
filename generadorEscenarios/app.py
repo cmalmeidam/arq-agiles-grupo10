@@ -61,56 +61,56 @@ def format_prepped_request(prepped, encoding=None):
 ## Caso 1 Credenciales Incorrectas
 def credencialesIncorrectas(session):
     session = FuturesSession()
-    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "fakePassword", "ip":"172.12.3.15" })
+    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "fakePassword", "ip":"186.84.21.99" })
     print (authResponse.result().json())
 
 ## Caso 2 Credenciales Correctas
 
 def credencialesCorrectas(session):
     session = FuturesSession()
-    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"172.12.3.15" })
+    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"186.84.21.99" })
     print (authResponse.result().json())
 
 ## Caso 3 Token Válido
 
 def tokenValido(session):
     session = FuturesSession()
-    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"172.12.3.15" })
+    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"186.84.21.99" })
     contentResponse = authResponse.result().json()
-    return session.get(currentServices[0]['url'], json={"ip": "172.12.3.15", "token": contentResponse["token"]})
+    return session.get(currentServices[0]['url'], json={"token": contentResponse["token"], "usuario": "chalmeida"})
 
 ## Caso 4 Token Inválido
 def tokenInvalido(session):
     session = FuturesSession()
-    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"172.12.3.15" })
+    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"186.84.21.99" })
     authResponse.result().json()
-    return session.get(currentServices[0]['url'], json={"ip": "172.12.3.15", "token": ''.join(random.choices(string.ascii_letters + string.digits, k=32))})
+    return session.get(currentServices[0]['url'], json={"usuario": "chalmeida", "token": ''.join(random.choices(string.ascii_letters + string.digits, k=32))})
 
 ## Caso 5 Token Suplantado
 
 def tokenSuplantado(session):
     session = FuturesSession()
-    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"186.84.35.99" })
+    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"186.84.21.99" })
     contentResponse = authResponse.result().json()
     print(contentResponse)
-    return session.get(currentServices[0]['url'], json={"ip": "186.84.35.39", "token": contentResponse["token"]})
+    return session.get(currentServices[0]['url'], json={"usuario": "chalmeida", "token": contentResponse["token"]})
 
 ## Caso 6 Token Válido no Autorizado
 def tokenNoAutorizado(session):
     session = FuturesSession()
-    authResponse = session.post(authService['url'],json={"usuario": "usuario1", "contrasena": "usuario1", "ip":"172.12.3.15" })
+    authResponse = session.post(authService['url'],json={"usuario": "usuario1", "contrasena": "usuario1", "ip":"186.84.35.15" })
     contentResponse = authResponse.result().json()
     print(contentResponse)
-    return session.get(currentServices[1]['url'], json={"ip": "172.12.3.15", "token": contentResponse["token"]})
+    return session.get(currentServices[1]['url'], json={"usuario": "usuario1", "token": contentResponse["token"]})
 
 ## Caso 7 Token Expirado
 def tokenExpirado(session):
     session = FuturesSession()
-    authResponse = session.post(authService['url'],json={"usuario": "usuario1", "contrasena": "usuario1", "ip":"172.12.3.15" })
+    authResponse = session.post(authService['url'],json={"usuario": "usuario1", "contrasena": "usuario1", "ip":"186.84.35.15" })
     contentResponse = authResponse.result().json()
     print(contentResponse)
     time.sleep(10)
-    return session.get(currentServices[0]['url'], json={"ip": "172.12.3.15", "token": contentResponse["token"]})
+    return session.get(currentServices[0]['url'], json={"usuario": "usuario1", "token": contentResponse["token"]})
 
 caseArray = [ credencialesIncorrectas, credencialesCorrectas, tokenInvalido, tokenInvalido, tokenSuplantado, tokenNoAutorizado ]
 caseArrayLength = len(caseArray)
