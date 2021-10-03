@@ -90,7 +90,7 @@ def tokenInvalido(session):
 
 def tokenSuplantado(session):
     session = FuturesSession()
-    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"186.84.21.99" })
+    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"182.84.21.99" })
     contentResponse = authResponse.result().json()
     print(contentResponse)
     return session.get(currentServices[0]['url'], json={"usuario": "chalmeida", "token": contentResponse["token"]})
@@ -109,10 +109,10 @@ def tokenExpirado(session):
     authResponse = session.post(authService['url'],json={"usuario": "usuario1", "contrasena": "usuario1", "ip":"186.84.35.15", "ttl": 1 })
     contentResponse = authResponse.result().json()
     print(contentResponse)
-    time.sleep(10)
+    time.sleep(2)
     return session.get(currentServices[0]['url'], json={"usuario": "usuario1", "token": contentResponse["token"]})
 
-caseArray = [ credencialesIncorrectas, credencialesCorrectas, tokenInvalido, tokenInvalido, tokenSuplantado, tokenNoAutorizado ]
+caseArray = [ credencialesIncorrectas, credencialesCorrectas, tokenValido, tokenInvalido, tokenSuplantado, tokenNoAutorizado, tokenExpirado ]
 caseArrayLength = len(caseArray)
 
 @app.route('/')
@@ -142,6 +142,7 @@ def get_data():
                 ''' Revisar logica de criterio para rechazar request HTTP '''
                 #Esta podría ser una opción para simular un error de Conección generando una variable aleatoria o recibiendo alguna instrucción del servicio en el body o el status code
                 if(promise.result().status_code != 200):
+                    logging.info(promise.result().status_code)
                     raise HTTPError()
                 print("RespuestaCorrecta")
                 print(promise.requestDetails)

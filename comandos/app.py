@@ -22,9 +22,9 @@ def protected():
     user = request.json["usuario"]
     token = request.json["token"]
     session = FuturesSession()
-    validacion = session.post('http://127.0.0.1:5001/validacion',json={"user": user, "token": token})
+    validacion = session.post('http://127.0.0.1:5001/validacion',json={"user": user, "token": token, "microservice" : "command"})
     if (validacion.result().status_code != 200):
-        return "Petición no válida", 403
+        return "Petición no válida", validacion.result().status_code
     else:
         return "Petición válida", 200
 
