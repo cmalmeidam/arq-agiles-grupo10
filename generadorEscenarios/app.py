@@ -100,9 +100,18 @@ def tokenSuplantado(session):
 ## Caso 6 Token Válido no Autorizado
 def tokenNoAutorizado(session):
     session = FuturesSession()
-    authResponse = session.post(authService['url'],json={"usuario": "chalmeida", "contrasena": "chalmeida", "ip":"172.12.3.15" })
+    authResponse = session.post(authService['url'],json={"usuario": "usuario1", "contrasena": "usuario1", "ip":"172.12.3.15" })
     contentResponse = authResponse.result().json()
     print(contentResponse)
+    return session.get(currentServices[1]['url'], json={"ip": "172.12.3.15", "token": contentResponse["token"]})
+
+## Caso 7 Token Expirado
+def tokenExpirado(session):
+    session = FuturesSession()
+    authResponse = session.post(authService['url'],json={"usuario": "usuario1", "contrasena": "usuario1", "ip":"172.12.3.15" })
+    contentResponse = authResponse.result().json()
+    print(contentResponse)
+    time.sleep(10)
     return session.get(currentServices[0]['url'], json={"ip": "172.12.3.15", "token": contentResponse["token"]})
 
 caseArray = [ credencialesIncorrectas, credencialesCorrectas, tokenInvalido, tokenInvalido, tokenSuplantado, tokenNoAutorizado ]
