@@ -58,5 +58,5 @@ class VistaValidacion(Resource):
         
         logging.info("El microservicio Validator respondio: " + msg)
         requests.get('https://sqs.us-east-2.amazonaws.com/867579940304/alertas-monitor.fifo?Action=SendMessage',
-                        params={'MessageBody': 'Validador ;' + 'respondio el usuario ; ' + user + ' ; ' + msg + ' ; ' + code, 'MessageDeduplicationId': id1, 'MessageGroupId': id2})
+                        params={'MessageBody': 'Validador ;' + 'respondio el usuario ; ' + user + ' ; ' + msg + ' ; ' + str(code), 'MessageDeduplicationId': id1, 'MessageGroupId': id2})
         return msg, code

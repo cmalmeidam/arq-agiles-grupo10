@@ -106,7 +106,7 @@ def tokenNoAutorizado(session):
 ## Caso 7 Token Expirado
 def tokenExpirado(session):
     session = FuturesSession()
-    authResponse = session.post(authService['url'],json={"usuario": "usuario1", "contrasena": "usuario1", "ip":"186.84.35.15" })
+    authResponse = session.post(authService['url'],json={"usuario": "usuario1", "contrasena": "usuario1", "ip":"186.84.35.15", "ttl": 1 })
     contentResponse = authResponse.result().json()
     print(contentResponse)
     time.sleep(10)
@@ -138,7 +138,6 @@ def get_data():
         print(promises)
         for promise in as_completed(promises):
             try:
-                time.sleep(1)
                 promise.result().content
                 ''' Revisar logica de criterio para rechazar request HTTP '''
                 #Esta podría ser una opción para simular un error de Conección generando una variable aleatoria o recibiendo alguna instrucción del servicio en el body o el status code

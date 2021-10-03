@@ -7,6 +7,7 @@ import datetime
 from ..modelos import db, Usuario
 from random import randrange
 
+
 def json_status(status_code, message):
     res = jsonify({
         'isBase64Encoded': False,
@@ -23,6 +24,10 @@ class Autenticar(Resource):
         id1 = randrange(99999)
         id2 = randrange(99999)
         key = "secret";
+        try:
+            time = request.json["ttl"];
+        except:
+            time = 3600
         logger.logger.info('Ingresar Autenticar')
         logger.logger.info('Validacion usuario tenga corecta las credenciales')
         usuario = Usuario.query.filter(Usuario.nombre == request.json["usuario"],
@@ -34,7 +39,7 @@ class Autenticar(Resource):
             return "Credenciales invalidas", 404
         else:
             token_de_acceso = jwt.encode(
-                {"exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=10), "usuario": request.json["usuario"],
+                {"exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=time), "usuario": request.json["usuario"],
                  "ip": request.json["ip"], "rol": usuario.rol}, key, algorithm="HS256");
             decode = jwt.decode(token_de_acceso, key, algorithms="HS256")
             logger.logger.info('decode = ' + str(decode))
