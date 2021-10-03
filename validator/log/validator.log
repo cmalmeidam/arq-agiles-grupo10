@@ -1,1 +1,134 @@
-
+10/04/2021 12:04:59 AM El microservicio Validator respondio: Usuario autorizado
+10/04/2021 12:04:59 AM Exception on /validacion [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 467, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 582, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/danielalbertolariostorres/Documents/arq-agiles-grupo10/validator/vistas/vistas.py", line 61, in post
+    params={'MessageBody': 'Validador ;' + 'respondio el usuario ; ' + user + ' ; ' + msg + ' ; ' + code, 'MessageDeduplicationId': id1, 'MessageGroupId': id2})
+TypeError: can only concatenate str (not "int") to str
+10/04/2021 12:04:59 AM 127.0.0.1 - - [04/Oct/2021 00:04:59] "[35m[1mPOST /validacion HTTP/1.1[0m" 500 -
+10/04/2021 12:05:00 AM El microservicio Validator respondio: Token con error en decodificación
+10/04/2021 12:05:00 AM Exception on /validacion [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 467, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 582, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/danielalbertolariostorres/Documents/arq-agiles-grupo10/validator/vistas/vistas.py", line 61, in post
+    params={'MessageBody': 'Validador ;' + 'respondio el usuario ; ' + user + ' ; ' + msg + ' ; ' + code, 'MessageDeduplicationId': id1, 'MessageGroupId': id2})
+TypeError: can only concatenate str (not "int") to str
+10/04/2021 12:05:00 AM 127.0.0.1 - - [04/Oct/2021 00:05:00] "[35m[1mPOST /validacion HTTP/1.1[0m" 500 -
+10/04/2021 12:05:00 AM Exception on /validacion [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 467, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 582, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/danielalbertolariostorres/Documents/arq-agiles-grupo10/validator/vistas/vistas.py", line 18, in post
+    microservice = request.json["microservice"]
+KeyError: 'microservice'
+10/04/2021 12:05:00 AM 127.0.0.1 - - [04/Oct/2021 00:05:00] "[35m[1mPOST /validacion HTTP/1.1[0m" 500 -
+10/04/2021 12:05:01 AM El microservicio Validator respondio: Token con error en decodificación
+10/04/2021 12:05:01 AM Exception on /validacion [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 467, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 582, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/danielalbertolariostorres/Documents/arq-agiles-grupo10/validator/vistas/vistas.py", line 61, in post
+    params={'MessageBody': 'Validador ;' + 'respondio el usuario ; ' + user + ' ; ' + msg + ' ; ' + code, 'MessageDeduplicationId': id1, 'MessageGroupId': id2})
+TypeError: can only concatenate str (not "int") to str
+10/04/2021 12:05:01 AM 127.0.0.1 - - [04/Oct/2021 00:05:01] "[35m[1mPOST /validacion HTTP/1.1[0m" 500 -
+10/04/2021 12:05:01 AM El microservicio Validator respondio: Token con error en decodificación
+10/04/2021 12:05:01 AM Exception on /validacion [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 467, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 582, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/danielalbertolariostorres/Documents/arq-agiles-grupo10/validator/vistas/vistas.py", line 61, in post
+    params={'MessageBody': 'Validador ;' + 'respondio el usuario ; ' + user + ' ; ' + msg + ' ; ' + code, 'MessageDeduplicationId': id1, 'MessageGroupId': id2})
+TypeError: can only concatenate str (not "int") to str
+10/04/2021 12:05:01 AM 127.0.0.1 - - [04/Oct/2021 00:05:01] "[35m[1mPOST /validacion HTTP/1.1[0m" 500 -
+10/04/2021 12:05:02 AM El microservicio Validator respondio: Token con error en decodificación
+10/04/2021 12:05:02 AM Exception on /validacion [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 467, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 582, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/danielalbertolariostorres/Documents/arq-agiles-grupo10/validator/vistas/vistas.py", line 61, in post
+    params={'MessageBody': 'Validador ;' + 'respondio el usuario ; ' + user + ' ; ' + msg + ' ; ' + code, 'MessageDeduplicationId': id1, 'MessageGroupId': id2})
+TypeError: can only concatenate str (not "int") to str
+10/04/2021 12:05:02 AM 127.0.0.1 - - [04/Oct/2021 00:05:02] "[35m[1mPOST /validacion HTTP/1.1[0m" 500 -
+10/04/2021 12:05:03 AM El microservicio Validator respondio: Usuario autorizado
+10/04/2021 12:05:03 AM Exception on /validacion [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 467, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 582, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/danielalbertolariostorres/Documents/arq-agiles-grupo10/validator/vistas/vistas.py", line 61, in post
+    params={'MessageBody': 'Validador ;' + 'respondio el usuario ; ' + user + ' ; ' + msg + ' ; ' + code, 'MessageDeduplicationId': id1, 'MessageGroupId': id2})
+TypeError: can only concatenate str (not "int") to str
+10/04/2021 12:05:03 AM 127.0.0.1 - - [04/Oct/2021 00:05:03] "[35m[1mPOST /validacion HTTP/1.1[0m" 500 -
+10/04/2021 12:05:04 AM Exception on /validacion [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 467, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask_restful/__init__.py", line 582, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/Users/danielalbertolariostorres/Documents/arq-agiles-grupo10/validator/vistas/vistas.py", line 18, in post
+    microservice = request.json["microservice"]
+KeyError: 'microservice'
+10/04/2021 12:05:04 AM 127.0.0.1 - - [04/Oct/2021 00:05:04] "[35m[1mPOST /validacion HTTP/1.1[0m" 500 -

@@ -12,13 +12,13 @@ import logging
 app = create_app('default')
 app_context = app.app_context()
 app_context.push()
-logging.basicConfig(filename='escenarios.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', encoding = "UTF-8")
+logging.basicConfig(filename='./log/escenarios.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', encoding = "UTF-8")
 
 # validUsers in db or service
 users = [{ "email": "chalmeida", "password": "chalmeida"},{ "email": "user1", "password": "user1"}]
 
 # add urls of services to be monitored, states are not considered yet in the logic
-currentServices = [{"url": 'http://localhost:5000/respuesta', "nombre": "consulta"},{"url": 'http://localhost:5001/respuesta', "nombre": "comando"}]
+currentServices = [{"url": 'http://localhost:5003', "nombre": "consulta"},{"url": 'http://localhost:5002', "nombre": "comando"}]
 currentServicesLength = len(currentServices)
 
 # Authentication Service
