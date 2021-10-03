@@ -3,3 +3,4 @@ datetime
 uuid
 Flask-SQLAlchemy
 Flask-JWT-Extended==4.2.3
+requests-futures==1.0.0
